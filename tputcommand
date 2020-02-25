@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# clear the screen
+tput clear
+
+# Move cursor to screen location X,Y (top left is 0,0)
+tput cup 3 15
+
+# Set a foreground colour using ANSI escape
+tput setaf 3
+echo "SYSTEM MAINTANENCE"
+tput sgr0
+
+tput cup 5 17
+# Set reverse video mode
+tput rev
+echo "M A I N - M E N U"
+tput sgr0
+
+tput cup 7 15
+echo "1. Update"
+
+tput cup 8 15
+echo "2. Upgrade"
+
+tput cup 9 15
+echo "3. Install"
+
+tput cup 10 15
+echo "4. Exit"
+
+# Set bold mode
+tput bold
+tput cup 12 15
+read -p "Enter your choice [1-4] " choice
+
+
+case $choice in
+  "1")
+    sudo apt update
+    ;;
+  "2")
+    sudo apt upgrade -y
+    ;;
+  "3")
+    read -p "Name of the program you want to install: " program
+    sudo apt install -y $program
+    ;;
+  "4")
+    exit
+    ;;
+  *)
+  echo "Please choose 1-4"
+esac
+
+
+tput sgr0
+tput rc
